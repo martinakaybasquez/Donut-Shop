@@ -1,4 +1,12 @@
 <h1>DONUTS</h1>
-@for (donuts of donut.results; track $index) {
+<!-- @for (donuts of donut.results; track $index) {
     <p> {{donuts.name}} </p>
-}
+} -->
+
+<ul>
+    @for (donuts of donut.results; track $index) {
+        <li>
+            <a routerLink="/Details/{{donuts.id}}"> {{donuts.name}} </a>
+        </li>
+    }
+</ul>

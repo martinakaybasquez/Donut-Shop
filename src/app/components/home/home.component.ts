@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { DonutModel } from '../../models/donut';
 import { DonutService } from '../../services/donut.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  
   donut:DonutModel = {} as DonutModel;
   constructor(private donutService:DonutService){}
 
