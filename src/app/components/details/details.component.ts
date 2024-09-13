@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { DonutModel } from '../../models/donut';
 import { ActivatedRoute } from '@angular/router';
 import { DonutService } from '../../services/donut.service';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-details',
@@ -13,14 +12,17 @@ import { HttpParams } from '@angular/common/http';
 })
 export class DetailsComponent {
 
-  donutResult:DonutModel = {} as DonutModel;
+  donut:DonutModel = {} as DonutModel;
   constructor(private activatedRoute:ActivatedRoute, private donutService:DonutService){}
 
   ngOnInit(){
     this.activatedRoute.paramMap.subscribe((params) => {
       const id:number = Number(params.get("id"));
       console.log(id);
-      // this.donutResult = this.donutService.getdonuts()
+
+      this.donutService.getDonuts(id).subscribe((response:DetailsComponent) => {
+        this.donut = response;
+      })
     })
   }
 }

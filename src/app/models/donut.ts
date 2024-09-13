@@ -10,3 +10,13 @@ export interface Result {
     photo:             string;
     photo_attribution: string;
 }
+
+export interface Details {
+    id:                number;
+    ref:               string;
+    name:              string;
+    calories:          number;
+    extras:            string[];
+    photo:             string;
+    photo_attribution: string;
+}
