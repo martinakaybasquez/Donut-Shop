@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { DonutModel } from '../../models/donut';
+import { DetailedDonut, DonutModel, Result } from '../../models/donut';
 import { ActivatedRoute } from '@angular/router';
 import { DonutService } from '../../services/donut.service';
+import { popResultSelector } from 'rxjs/internal/util/args';
 
 @Component({
   selector: 'app-details',
@@ -12,18 +13,36 @@ import { DonutService } from '../../services/donut.service';
 })
 export class DetailsComponent {
 
-  donut:DonutModel = {} as DonutModel;
+  detailedDonut:DetailedDonut = {} as DetailedDonut;
+  results:Result = {} as Result;
+
   constructor(private activatedRoute:ActivatedRoute, private donutService:DonutService){}
 
   ngOnInit(){
+    this.callDetailedDonutApi();
+  }
+
+  callDetailedDonutApi(){
     this.activatedRoute.paramMap.subscribe((params) => {
       const id:number = Number(params.get("id"));
       console.log(id);
 
-      this.donutService.getDonuts(id).subscribe((response:DetailsComponent) => {
-        this.donut = response;
+      this.donutService.getDetailedDonuts(id).subscribe((response:DetailedDonut) => {
+        this.detailedDonut = response;
       })
     })
   }
+
+  callDonutMatch(){
+    this.donutService.getDonuts().subscribe((response:DonutModel) => {
+      response.results.forEach(donut => {
+        if (donut.name === this.detailedDonut.name){
+          this.results = donut;
+        }
+      })
+      console.log(response);
+
+    })
+  }
 }
-      
+

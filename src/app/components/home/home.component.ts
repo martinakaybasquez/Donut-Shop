@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DonutModel } from '../../models/donut';
+import { DetailedDonut, DonutModel } from '../../models/donut';
 import { DonutService } from '../../services/donut.service';
 import { RouterLink } from '@angular/router';
 import { HttpEventType, HttpParams } from '@angular/common/http';
@@ -21,19 +21,9 @@ export class HomeComponent {
   }
 
   callDonutApi(){
-    this.donutService.getDonuts(id).subscribe((response:DonutModel) => {
+    this.donutService.getDonuts().subscribe((response:DonutModel) => {
       console.log(response);
       this.donut = response;
     })
   }
-
-  // getDonutByIndex(donuts:number){
-  //   return http
-    
-  // }
-
-  // getById(id:number){
-  //   return http.get<..>(`https:www.api.com/donuts/${id}`)
-  // }
-
 }

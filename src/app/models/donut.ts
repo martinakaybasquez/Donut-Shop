@@ -11,7 +11,7 @@ export interface Result {
     photo_attribution: string;
 }
 
-export interface Details {
+export interface DetailedDonut {
     id:                number;
     ref:               string;
     name:              string;
